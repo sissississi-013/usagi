@@ -27,11 +27,11 @@ At 10% density, each query block touches only 4-12 KV blocks. The kernel is domi
 
 [FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691) (Dao 2023). Reduce non-matmul work. Use exp2 (single-cycle PTX on NVIDIA) instead of exp. Separate the hot matmul path from masking and bookkeeping. With only 4-12 KV blocks per query row, every scalar op matters.
 
-[FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision](https://arxiv.org/abs/2407.08691) (Shah et al. 2024). Overlap data movement with tensor-core compute using TMA descriptors and warp-specialized pipelines. Full FA3-style warp specialization is hard to reproduce in Triton, but the principle (structure the kernel so KV loads overlap with compute) is the right direction.
+[FlashAttention-3: Fast and Accurate Attention with Asynchrony and Low-precision](https://arxiv.org/abs/2407.08608) (Shah et al. 2024). Overlap data movement with tensor-core compute using TMA descriptors and warp-specialized pipelines. Full FA3-style warp specialization is hard to reproduce in Triton, but the principle (structure the kernel so KV loads overlap with compute) is the right direction.
 
 [Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention](https://arxiv.org/abs/2502.11089) (Yuan et al. 2025). Fuse structured sparse paths instead of treating everything as generic CSR. Sliding window has regular contiguous structure. A single generic CSR kernel is unlikely to be optimal.
 
-[A Practical Guide to Implementing and Optimizing Triton Kernels](https://arxiv.org/abs/2511.11581) (Huh et al. 2025). Branching inside the inner loop breaks Triton's software pipelining, causing up to 2x performance loss. This motivated our split-diagonal approach.
+[The Anatomy of a Triton Attention Kernel](https://arxiv.org/abs/2511.11581) (Ringlein et al. 2025). Branching inside the inner loop breaks Triton's software pipelining, causing up to 2x performance loss. This motivated our split-diagonal approach.
 
 ### H100 hardware reference
 
