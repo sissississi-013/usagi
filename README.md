@@ -26,11 +26,11 @@ See [docs/OPTIMIZATION_JOURNAL.md](docs/OPTIMIZATION_JOURNAL.md) for the full op
 
 ## Kernels
 
-| File | Geo mean | Description |
-|------|----------|-------------|
-| `kernels/v7_blockptr_warpspec.py` | 0.660ms | Best version. Block pointers + warp specialization. |
-| `kernels/v4_split_diagonal.py` | 0.657ms | Previous best. Manual pointer loads, split diagonal. |
-| `kernels/v1_baseline.py` | 0.850ms | First leaderboard-accepted version. |
+| File | Measured | Leaderboard | Description |
+|------|----------|-------------|-------------|
+| `kernels/v7_blockptr_warpspec.py` | 0.660ms median | - | Best measured. Block pointers + warp specialization. |
+| `kernels/v4_leaderboard_0740ms.py` | 0.657ms median | **0.74ms** | Leaderboard submission (4th place). Split diagonal, manual loads. |
+| `kernels/v1_baseline.py` | 0.850ms | 0.85ms | First accepted submission. Ctypes launcher. |
 
 Each file is a self-contained submission: drop it into the challenge harness as `submission.py`.
 
